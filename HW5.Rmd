@@ -1,0 +1,77 @@
+---
+title: "HW5"
+author: "Chao Chen Yu"
+date: "3/2/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+```{r}
+ Stockreturns <- c(-8.36,   1.63,  -2.27, -2.93,  -2.70, 
+                           -2.93, -9.14, -2.64, 6.82,   -2.35, 
+                           -3.58,   6.13,   7.00, -15.25, -8.66,
+                           -1.03, -9.16,  -1.25, -1.22,  -10.27,
+                           -5.11, -0.80,  -1.44,  1.28,  -0.65,
+                            4.34,   12.22, -7.21, -0.09, 7.34, 
+                            5.04,  -7.24,  -2.14, -1.01,  -1.41, 
+                            12.03, -2.53,  4.33,  1.35)
+Stockreturns
+length(Stockreturns)
+```
+
+1.
+```{r}
+mean(Stockreturns) 
+```
+
+2.
+```{r}
+sd(Stockreturns)
+```
+
+3.
+```{r}
+length(Stockreturns[Stockreturns < -1.5] ) / length(Stockreturns) *100
+#or
+pnorm(q = -1.5 , mean = -1.12 , sd = 5.98)*100
+```
+
+4.
+```{r}
+qnorm(p = 0.7, mean = -1.12, sd = 5.98)
+```
+
+5.
+```{r}
+quantile(Stockreturns , 0.25)
+```
+
+6.
+```{r}
+boxplot(Stockreturns)
+#"As we can see, the box is symmetrical with the mean and median in the center. Moreover, we can see few outliers.
+
+qqnorm(Stockreturns)
+qqline(Stockreturns)
+#Some points are not close along the line, it seems that it dose not have normal distribution.
+```
+
+7-8
+H0 : u >= 0.95 , H1 : u < 0.95
+```{r}
+t.test(Stockreturns ,mu = 0.95 , alternative = "less", conf.level = .95)
+#p-value = 0.01827 < 0.05, we reject H0. mu = 0.95 is not in the confidence interval.
+#we reject null hypothesis as well.
+```
+
+9.
+Yes, the broker is worse than average. Since the p-value < .05, there is sufficient evidence 
+at the 0.05 level of significance to reject the claim that mean of return is greater or
+equal to 0.95. 
+
+
